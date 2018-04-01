@@ -43,9 +43,11 @@ public class ConsultaLivroServlet extends HttpServlet {
 			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
 		}*/
 		
-		for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
+		request.setAttribute("results", ConexaoBanco.coletarPesquisas());
+		request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
+		/*for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
 			writer.println(p);
-		}
+		}*/
 	}
 
 	/**

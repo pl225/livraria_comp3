@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import meu_pacote.Pesquisa;
+
 public class ConexaoBanco {
 	private static final String URL = "jdbc:derby:/home/matheus/MyDB";
 	private static final String USER = "pl225";

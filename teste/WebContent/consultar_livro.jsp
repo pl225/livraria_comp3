@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
 <style type="text/css">
 	
 	label.form-control {
@@ -15,7 +14,9 @@
 	}
 </style>
 
-<tags:master>
+<%@ include file="/WEB-INF/header.jsp" %>
+
+<div style="width:80%; margin: auto;">
 
 	<div class="row col-md-12 col-sm-12" style="margin-left: .5px">
 		<h3>Consulta de livros</h3>
@@ -47,7 +48,7 @@
 			</div>
 			<div class="form-check form-check-inline col-md-2 col-sm-3">
 	  			<input type="radio" id="titulo" name="tipo_busca" required="true" class="form-check-input" value="4">
-	  			<label class="form-check-label form-control" for="titulo">TÃ­tulo</label>
+	  			<label class="form-check-label form-control" for="titulo">Título</label>
 			</div>
 		</div>
 	
@@ -70,5 +71,33 @@
 		</div>
 	
 	</form>
+	
+	<table class="table">
+		<th>Objeto</th>
+	
+		<%@ page import="java.util.ArrayList" %>
+		<%@ page import="meu_pacote.Pesquisa" %>
+		
+		<%
+			if (request.getAttribute("results") != null) {
+				ArrayList<?> lista = (ArrayList<?>) request.getAttribute("results");
+				Iterator <?> lista_iterada = lista.listIterator();
+				
+				while (lista_iterada.hasNext()) {
+					Object o = lista_iterada.next();
+					if (o instanceof meu_pacote.Pesquisa) {
+						
+		%>
+		<tr>
+			<td><%= o %></td>
+		</tr>
+		<%
+					}
+				}
+			}
+		%>
+	</table>
 
-</tags:master>
+</div>
+
+<%@ include file="/WEB-INF/footer.jsp" %>
