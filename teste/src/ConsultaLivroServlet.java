@@ -1,6 +1,10 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -29,7 +33,19 @@ public class ConsultaLivroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter writer = response.getWriter();
+		// TODO Auto-generated method stub
+		
+		/*Enumeration<String> enumerador = request.getParameterNames();
+		String parametro;
+		while (enumerador.hasMoreElements()) {
+			parametro = enumerador.nextElement();
+			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
+		}*/
+		
+		for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
+			writer.println(p);
+		}
 	}
 
 	/**
@@ -38,19 +54,6 @@ public class ConsultaLivroServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Enumeration<String> enumerador = request.getParameterNames();
-		String parametro;
-		while (enumerador.hasMoreElements()) {
-			parametro = enumerador.nextElement();
-			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
-		}
-	}
-	
-	
+	}	
 
 }
