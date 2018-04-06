@@ -1,6 +1,3 @@
-
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.ArrayList"%>
 <style type="text/css">
 	
 	label.form-control {
@@ -77,6 +74,7 @@
 	
 		<%@ page import="java.util.ArrayList" %>
 		<%@ page import="meu_pacote.Pesquisa" %>
+		<%@ page import="java.util.Iterator" %>
 		
 		<%
 			if (request.getAttribute("results") != null) {

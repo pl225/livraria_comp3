@@ -33,7 +33,6 @@ public class ConsultaLivroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter writer = response.getWriter();
 		// TODO Auto-generated method stub
 		
 		/*Enumeration<String> enumerador = request.getParameterNames();
