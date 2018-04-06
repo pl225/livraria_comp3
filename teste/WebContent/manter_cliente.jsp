@@ -1,12 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+<%@ include file="/WEB-INF/header.jsp" %>
 
-<style type="text/css">
-	
-</style>
-
-<tags:master>
+<div style="width:80%; margin: auto;">
 
 	<div class="row col-md-12 col-sm-12" style="margin-left: .5px">
 		<h3>Atualizar dados pessoais</h3>
@@ -32,7 +26,7 @@
 			<label for="logradouro" class="col-md-1">Logradouro</label>
 			<input type="text" name="logradouro" required class="form-control col-md-5">
 			
-			<label for="bairro" class="col-md-1" style="max-width: 4.333%">NÂº</label>
+			<label for="bairro" class="col-md-1" style="max-width: 4.333%">Nº</label>
 			<input type="text" name="bairro" style="margin-left: 4%" class="form-control col-md-2">
 		</div>
 		
@@ -63,4 +57,6 @@
 	
 	</form>
 
-</tags:master>
+</div>
+
+<%@ include file="/WEB-INF/footer.jsp" %>
