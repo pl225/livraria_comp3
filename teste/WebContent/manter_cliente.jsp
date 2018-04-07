@@ -27,7 +27,7 @@
 			<input type="text" name="logradouro" required class="form-control col-md-5">
 			
 			<label for="bairro" class="col-md-1" style="max-width: 4.333%">Nº</label>
-			<input type="text" name="bairro" style="margin-left: 4%" class="form-control col-md-2">
+			<input type="text" name="numero" style="margin-left: 4%" class="form-control col-md-2">
 		</div>
 		
 		<div class="row form-group col-md-12">
@@ -42,7 +42,7 @@
 		<div class="row form-group col-md-12">
 			
 			<label for="celular" class="col-md-1">Celular</label>
-			<input type="text" name="bairro" required class="form-control col-md-5">
+			<input type="text" name="celular" required class="form-control col-md-5">
 			
 			<label for="tel_fixo" class="col-md-1">Tel. Fixo</label>
 			<input type="text" name="tel_fixo" class="form-control col-md-5">
