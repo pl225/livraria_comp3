@@ -11,6 +11,9 @@
 	}
 </style>
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
 <%@ include file="/WEB-INF/header.jsp" %>
 
 <div style="width:80%; margin: auto;">
@@ -21,7 +24,7 @@
 	
 	<br/>
 	
-	<form action="consultar_livro" method="get">
+	<form action="consultar_livros" method="get" id="formConsulta">
 
 		<div class="row form-group col-md-12 col-sm-12">
 		
@@ -69,13 +72,23 @@
 	
 	</form>
 	
-	<table class="table">
-		<th>Objeto</th>
+	<table class="table" id="resultados">
+		<thead>
+			<tr>
+				<th>ISBN</th>
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Editora</th>
+				<th>Estilo</th>
+				<th>Preço (R$)</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
 	
 		<%@ page import="java.util.ArrayList" %>
-		<%@ page import="meu_pacote.Pesquisa" %>
+		<%@ page import="meu_pacote.Livro" %>
 		<%@ page import="java.util.Iterator" %>
-		
+		<tbody>
 		<%
 			if (request.getAttribute("results") != null) {
 				ArrayList<?> lista = (ArrayList<?>) request.getAttribute("results");
@@ -83,17 +96,29 @@
 				
 				while (lista_iterada.hasNext()) {
 					Object o = lista_iterada.next();
-					if (o instanceof meu_pacote.Pesquisa) {
+					if (o instanceof meu_pacote.Livro) {
+						Livro l = (Livro) o;
 						
 		%>
 		<tr>
-			<td><%= o %></td>
+			<td><%= l.getISBN() %></td>
+			<td><%= l.getTitulo() %></td>
+			<td><%= l.getAutor().getNome() %></td>
+			<td><%= l.getEditora().getNome() %></td>
+			<td><%= l.getEstilo().getNome() %></td>
+			<td><%= l.getExemplar().getPrecoUnitario() %></td>
+			<td>
+				<a href="<%= "consultar_livro?isbn=" + l.getISBN() %>" style="color: inherit;">
+					<i class="material-icons" title="Comprar">&#xE8CC;</i>
+				</a>
+			</td>
 		</tr>
 		<%
 					}
 				}
 			}
 		%>
+		</tbody>
 	</table>
 
 </div>
