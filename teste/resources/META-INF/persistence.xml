@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+    xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="NotasHibernate" transaction-type="RESOURCE_LOCAL">
+        <!-- Persistence provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!-- Entity classes -->
+        <class>teste.hibernate.Historico</class>
+        <properties>
+            <!-- The JDBC driver of your database -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <!-- The JDBC URL to the database instance -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sd" />
+            <!-- The database username -->
+            <property name="javax.persistence.jdbc.user" value="pl225" />
+            <!-- The database password -->
+            <property name="javax.persistence.jdbc.password" value="Pl2252122*" />
+            <!-- The default schema -->
+            <property name="hibernate.default_schema" value="trab1"/>
+        </properties>
+    </persistence-unit>
+    
+    <persistence-unit name="Livraria" transaction-type="RESOURCE_LOCAL">
+        <!-- Persistence provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!-- Entity classes -->
+        <class>teste.hibernate.Estilo</class>
+        <class>teste.hibernate.Livro</class>
+        <class>teste.hibernate.Autor</class>
+        <class>teste.hibernate.Editora</class>
+        <class>teste.hibernate.Exemplar</class>
+        
+        <properties>
+            <!-- The JDBC driver of your database -->
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+            <!-- The JDBC URL to the database instance -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:/home/matheus/MyDB" />
+            <!-- The database username -->
+            <property name="javax.persistence.jdbc.user" value="pl225" />
+            <!-- The database password -->
+            <property name="javax.persistence.jdbc.password" value="Pl2252122*" />
+            <!-- The default schema -->
+            <property name="hibernate.default_schema" value="livraria"/>
+        </properties>
+    </persistence-unit>
+</persistence>

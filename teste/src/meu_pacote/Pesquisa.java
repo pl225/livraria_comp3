@@ -33,6 +33,21 @@ public class Pesquisa {
 		return "Pesquisa [tipoPesquisa=" + tipoPesquisa + ", palavraChave=" + palavraChave + "]";
 	}
 	
-	
+	public static String buildWhere (String tipoBusca, String parametro) {
+		String where = " WHERE ";
+		
+		switch (TipoPesquisa.getFromInt(Integer.parseInt(tipoBusca) - 1)) {
+			case ISBN:
+				where += " l.ISBN LIKE '%"+parametro+"%'"; break;
+			case TITULO:
+				where += " l.titulo LIKE '%"+parametro+"%'"; break;
+			case AUTOR:
+				where += " l.nome_autor LIKE '%"+parametro+"%'"; break;
+			case EDITORA:
+				where += " l.nome_editora LIKE '%"+parametro+"%'"; break;
+		}
+		
+		return where;
+	}
 	
 }
