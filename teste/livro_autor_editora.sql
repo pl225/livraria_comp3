@@ -21,3 +21,9 @@ CREATE TABLE livraria.livro (
   CONSTRAINT fk_livro_autor FOREIGN KEY(nome_autor) REFERENCES livraria.autor(nome),
   CONSTRAINT fk_livro_estilo FOREIGN KEY(nome_estilo) REFERENCES livraria.estilo(nome)
 );
+
+CREATE TABLE livraria.exemplar (
+	ISBN VARCHAR(20) PRIMARY KEY REFERENCES livraria.livro(ISBN),
+	precoUnitario real NOT NULL,
+	qtdDisponivel int NOT NULL
+);
