@@ -1,12 +1,6 @@
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HelloWorld
+ * Servlet implementation class ConsultarLivroServlet
  */
 @WebServlet("/consultar_livro")
-public class ConsultaLivroServlet extends HttpServlet {
+public class ComprarLivroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultaLivroServlet() {
+    public ComprarLivroServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +27,8 @@ public class ConsultaLivroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		
-		/*Enumeration<String> enumerador = request.getParameterNames();
-		String parametro;
-		while (enumerador.hasMoreElements()) {
-			parametro = enumerador.nextElement();
-			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
-		}*/
-		
-		request.setAttribute("results", ConexaoBanco.coletarPesquisas());
-		request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
-		/*for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
-			writer.println(p);
-		}*/
+		/*request.setAttribute("results", ConexaoBanco.consultarLivro(request.getParameter("tipo_busca"), request.getParameter("pesquisa")));
+		request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);*/
 	}
 
 	/**
@@ -55,6 +37,6 @@ public class ConsultaLivroServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}	
+	}
 
 }
