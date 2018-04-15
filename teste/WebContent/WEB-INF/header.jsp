@@ -45,6 +45,7 @@
 		    left: 0;
 		    bottom: 0;
 		    width: 100%;
+		    /* height: auto; */
 		    background-color: #f1f1f1;
 		    color: black;
 		    text-align: right;
