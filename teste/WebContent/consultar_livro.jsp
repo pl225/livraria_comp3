@@ -108,7 +108,7 @@
 			<td><%= l.getEstilo().getNome() %></td>
 			<td><%= l.getExemplar().getPrecoUnitario() %></td>
 			<td>
-				<a href="<%= "consultar_livro?isbn=" + l.getISBN() %>" style="color: inherit;">
+				<a href="<%= "comprar_livro?isbn=" + l.getISBN() %>" style="color: inherit;">
 					<i class="material-icons" title="Comprar">&#xE8CC;</i>
 				</a>
 			</td>

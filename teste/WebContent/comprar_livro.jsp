@@ -33,10 +33,10 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ page import="meu_pacote.Livro" %>
 
-<div style="width:80%; margin: auto; /* min-height:100%; position:relative; */" id="corpo">
+<div style="width:80%; margin: auto; min-height:100%; position:relative;" id="corpo">
 
 	<div class="row col-md-12 col-sm-12" style="margin-left: .5px">
-		<h3>Comprar o livro <%-- <%= ((Livro) request.getAttribute("livro")).getTitulo() %> --%></h3>
+		<h3>Comprar o livro <%= ((Livro) request.getAttribute("livro")).getTitulo() %></h3>
 	</div>
 	
 	<br/>
@@ -46,12 +46,12 @@
 		<div class="form-row col-md-12">
 			<div class="form-group col-md-3">
 				<label for="qtdExemplar">Quantidade de livros</label>
-				<input type="number" name="qtdExemplar" min="1" value="1" required class="form-control">
+				<input type="number" name="qtdExemplar" min="1" value="1"  class="form-control">
 			</div>
 			
 			<div class="form-group col-md-3">
-				<label for="totalPagar">Valor total a pagar</label>
-				<input type="text" name="totalPagar" readonly class="form-control">
+				<label for="totalPagar">Valor total a pagar (R$)</label>
+				<input type="text" name="totalPagar" readonly value="<%= ((Livro) request.getAttribute("livro")).getExemplar().getPrecoUnitario() %>" class="form-control">
 			</div>
 			
 		</div>
@@ -63,18 +63,18 @@
 			<label class="col-md-3" for="forma_pagamento" style="max-width: fit-content; padding-right: 4.666%">Forma de pagamento</label>
 			
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="credito" name="forma_pagamento" required="true" 
+	  			<input type="radio" id="credito" name="forma_pagamento" ="true" 
 	  			class="form-check-input" value="0">
 	  			<label class="form-check-label form-control" for="credito">Cartão de crédito</label>
 			</div>
 	
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="cheque" name="forma_pagamento" required="true" 
+	  			<input type="radio" id="cheque" name="forma_pagamento" ="true" 
 	  			class="form-check-input" value="1">
 	  			<label class="form-check-label form-control" for="cheque">Cheque</label>
 			</div>
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="dinheiro" name="forma_pagamento" required="true" 
+	  			<input type="radio" id="dinheiro" name="forma_pagamento" ="true" 
 	  			class="form-check-input" value="2">
 	  			<label class="form-check-label form-control" for="dinheiro">Dinheiro</label>
 			</div>
@@ -84,7 +84,7 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-6">
 					<label for="bandeira">Bandeira</label>
-					<select class="custom-select form-control" required>
+					<select class="custom-select form-control" >
 						<option value="" selected>(Selecione uma bandeira)</option>
 					</select>
 				</div>
@@ -93,23 +93,23 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
 					<label for="numCartao" >Nº cartão</label>
-					<input type="text" name="numCartao" required class="form-control">
+					<input type="text" name="numCartao"  class="form-control">
 				</div>
 				
 				<div class="form-group col-md-3">
 					<label for="digitoVerificador">Dígito Verificador</label>
-					<input type="text" name="digitoVerificador" required class="form-control">
+					<input type="text" name="digitoVerificador"  class="form-control">
 				</div>
 			</div>
 			
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
-					<label for="numParcelas">Nº parcelas</label>
-					<input type="number" name="numParcelas" min="1" max="1" value="1" required class="form-control">
+					<label for="numParcelasCd">Nº parcelas</label>
+					<input type="number" name="numParcelasCd" min="1" max="1" value="1"  class="form-control">
 				</div>
 				<div class="form-group col-md-3">
 					<label for="codSeguranca">Código de Segurança</label>
-					<input type="text" name="codSeguranca" required class="form-control">
+					<input type="text" name="codSeguranca"  class="form-control">
 				</div>
 			</div>
 		</div>
@@ -118,7 +118,7 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
 					<label for="quantiaPaga">Valor pago</label>
-					<input type="text" name="quantiaPaga" required class="form-control">
+					<input type="text" name="quantiaPaga"  class="form-control">
 				</div>
 				
 				<div class="form-group col-md-3">
@@ -181,30 +181,41 @@
 				<div class="form-row col-md-12">
 					<div class="form-group col-md-3">
 						<label for="codigoBanco">Código do banco</label>
-						<input type="text" name="codigoBanco" required class="form-control">
+						<input type="text" name="codigoBanco"  class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroAgencia">Número da Agência</label>
-						<input type="text" name="numeroAgencia" required class="form-control">
+						<input type="text" name="numeroAgencia"  class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="digitoAgencia">Díg. ver. Agência</label>
-						<input type="text" name="digitoAgencia" required class="form-control">
+						<input type="text" name="digitoAgencia"  class="form-control">
 					</div>
 				</div>
 				
 				<div class="form-row col-md-12">
 					<div class="form-group col-md-3">
 						<label for="numConta">Número da conta</label>
-						<input type="text" name="numConta" required class="form-control">
+						<input type="text" name="numConta"  class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroCheque">Número do cheque</label>
-						<input type="text" name="numeroCheque" required class="form-control">
+						<input type="text" name="numeroCheque"  class="form-control">
 					</div>
+										
+					<div class="form-group col-md-3" class="predatado" hidden>
+						<label for="numParcelasCheque">Nº parcelas</label>
+						<input type="number" name="numParcelasCheque"  min="1" value="1" class="form-control">
+					</div>
+					
+					<div class="form-group col-md-3" class="predatado" hidden>
+						<label for="dataDebito">Data debt.</label>
+						<input type="date" name="dataDebito"  class="form-control">
+					</div>
+					
 				</div>
 			</div>
 		</div>

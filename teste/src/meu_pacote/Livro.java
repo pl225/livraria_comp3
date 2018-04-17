@@ -79,5 +79,9 @@ public class Livro {
 		return editora;
 	}	
 	
-	
+	public static class LivroNaoEncontradoException extends Exception {
+		public LivroNaoEncontradoException () {
+			super("Livro não encontrado");
+		}
+	}
 }

@@ -13,7 +13,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import meu_pacote.Pesquisa;
+import meu_pacote.Pesquisa.TipoPesquisa;
 import meu_pacote.Livro;
+import meu_pacote.Livro.LivroNaoEncontradoException;
 
 public class ConexaoBanco {
 	private static final String URL = "jdbc:derby:/home/matheus/MyDB";
@@ -129,6 +131,45 @@ public class ConexaoBanco {
 		}
 		
 		return livros;
+	}
+	
+	public static Livro consultarLivro (String isbn) throws LivroNaoEncontradoException {
+		connect();
+		
+		Statement stmt = null;
+		ResultSet results = null;
+		Livro livro = null;
+		
+		try {
+			
+			stmt = conn.createStatement();
+			results = stmt.executeQuery("SELECT "
+					+ " l.isbn AS ISBN, l.titulo, l.nome_autor, l.nome_editora, l.nome_estilo,"
+					+ " e.precoUnitario, e.qtdDisponivel "
+					+ " FROM livraria.livro l"
+					+ " INNER JOIN livraria.exemplar e ON e.ISBN = l.isbn"
+					+ Pesquisa.buildWhere(TipoPesquisa.ISBN, isbn));
+			
+			if (results.next()) {
+				livro = new Livro(results.getString("ISBN"), results.getString("titulo"),
+						results.getInt("qtdDisponivel"), results.getString("nome_autor"),
+						results.getString("nome_estilo"), results.getString("nome_editora"),
+						results.getFloat("precoUnitario"), results.getInt("qtdDisponivel"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				disconnect(stmt, results);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (livro != null) return livro;
+		else throw new Livro.LivroNaoEncontradoException();
 	}
 	
 }

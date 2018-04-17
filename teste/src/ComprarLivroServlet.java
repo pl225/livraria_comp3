@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import meu_pacote.Livro.LivroNaoEncontradoException;
+
 /**
  * Servlet implementation class ConsultarLivroServlet
  */
-@WebServlet("/consultar_livro")
+@WebServlet("/comprar_livro")
 public class ComprarLivroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,8 +29,13 @@ public class ComprarLivroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/*request.setAttribute("results", ConexaoBanco.consultarLivro(request.getParameter("tipo_busca"), request.getParameter("pesquisa")));
-		request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);*/
+		try {
+			request.setAttribute("livro", ConexaoBanco.consultarLivro(request.getParameter("isbn")));
+			request.getRequestDispatcher("/comprar_livro.jsp").forward(request, response);
+		} catch (LivroNaoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

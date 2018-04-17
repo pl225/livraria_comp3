@@ -50,4 +50,21 @@ public class Pesquisa {
 		return where;
 	}
 	
+	public static String buildWhere (TipoPesquisa tipoBusca, String parametro) {
+		String where = " WHERE ";
+		
+		switch (tipoBusca) {
+			case ISBN:
+				where += " l.ISBN LIKE '%"+parametro+"%'"; break;
+			case TITULO:
+				where += " l.titulo LIKE '%"+parametro+"%'"; break;
+			case AUTOR:
+				where += " l.nome_autor LIKE '%"+parametro+"%'"; break;
+			case EDITORA:
+				where += " l.nome_editora LIKE '%"+parametro+"%'"; break;
+		}
+		
+		return where;
+	}
+	
 }
