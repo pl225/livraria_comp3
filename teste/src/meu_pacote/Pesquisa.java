@@ -55,13 +55,13 @@ public class Pesquisa {
 		
 		switch (tipoBusca) {
 			case ISBN:
-				where += " l.ISBN LIKE '%"+parametro+"%'"; break;
+				where += " l.ISBN = '"+parametro+"'"; break;
 			case TITULO:
-				where += " l.titulo LIKE '%"+parametro+"%'"; break;
+				where += " l.titulo ='"+parametro+"'"; break;
 			case AUTOR:
-				where += " l.nome_autor LIKE '%"+parametro+"%'"; break;
+				where += " l.nome_autor = '"+parametro+"'"; break;
 			case EDITORA:
-				where += " l.nome_editora LIKE '%"+parametro+"%'"; break;
+				where += " l.nome_editora = '"+parametro+"'"; break;
 		}
 		
 		return where;

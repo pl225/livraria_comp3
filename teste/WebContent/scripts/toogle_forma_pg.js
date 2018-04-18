@@ -22,3 +22,16 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 		document.getElementsByName("totalPagar")[0].value = parseFloat(this.value * precoUnitario).toFixed(2);
 	});
 });
+
+document.getElementById("formCompraLivro").addEventListener('submit', function (e) {
+	e.preventDefault();
+	
+	var qtdExemplar = document.getElementsByName("qtdExemplar")[0];
+	var formaPagamento = document.getElementsByName("forma_pagamento");
+	var invalido = "is-invalid";
+	
+	if (qtdExemplar.value === '') {
+		qtdExemplar.classList.add(invalido);
+		//return;
+	}
+});

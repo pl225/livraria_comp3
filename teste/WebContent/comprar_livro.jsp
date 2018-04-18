@@ -28,8 +28,6 @@
 	
 </style>
 
-<script type="text/javascript" src="scripts/toogle_forma_pg.js" async></script>
-
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ page import="meu_pacote.Livro" %>
 
@@ -46,7 +44,10 @@
 		<div class="form-row col-md-12">
 			<div class="form-group col-md-3">
 				<label for="qtdExemplar">Quantidade de livros</label>
-				<input type="number" name="qtdExemplar" min="1" value="1"  class="form-control">
+				<input type="number" name="qtdExemplar" min="1" value="1" required class="form-control">
+				<div class="invalid-feedback">
+      			  Este campo é obrigatório.
+      			</div>
 			</div>
 			
 			<div class="form-group col-md-3">
@@ -63,18 +64,18 @@
 			<label class="col-md-3" for="forma_pagamento" style="max-width: fit-content; padding-right: 4.666%">Forma de pagamento</label>
 			
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="credito" name="forma_pagamento" ="true" 
+	  			<input type="radio" id="credito" name="forma_pagamento" required 
 	  			class="form-check-input" value="0">
 	  			<label class="form-check-label form-control" for="credito">Cartão de crédito</label>
 			</div>
 	
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="cheque" name="forma_pagamento" ="true" 
+	  			<input type="radio" id="cheque" name="forma_pagamento" required 
 	  			class="form-check-input" value="1">
 	  			<label class="form-check-label form-control" for="cheque">Cheque</label>
 			</div>
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
-	  			<input type="radio" id="dinheiro" name="forma_pagamento" ="true" 
+	  			<input type="radio" id="dinheiro" name="forma_pagamento" required 
 	  			class="form-check-input" value="2">
 	  			<label class="form-check-label form-control" for="dinheiro">Dinheiro</label>
 			</div>
@@ -228,5 +229,5 @@
 
 </div>
 
-
+<script type="text/javascript" src="scripts/toogle_forma_pg.js" ></script>
 <%@ include file="/WEB-INF/footer.jsp" %>

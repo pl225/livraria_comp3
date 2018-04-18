@@ -34,7 +34,7 @@ public class ComprarLivroServlet extends HttpServlet {
 			request.getRequestDispatcher("/comprar_livro.jsp").forward(request, response);
 		} catch (LivroNaoEncontradoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.sendError(404, e.getMessage());;
 		}
 	}
 
