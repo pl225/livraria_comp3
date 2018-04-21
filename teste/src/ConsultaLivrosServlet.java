@@ -32,32 +32,13 @@ public class ConsultaLivrosServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		
-		/*Enumeration<String> enumerador = request.getParameterNames();
-		String parametro;
-		while (enumerador.hasMoreElements()) {
-			parametro = enumerador.nextElement();
-			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
-		}*/
 		
 		try {
 			request.setAttribute("results", ConexaoBanco.consultarLivros(request.getParameter("tipo_busca"), request.getParameter("pesquisa")));
 			request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			response.sendError(500, e.getMessage());
 		}
-		/*for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
-			writer.println(p);
-		}*/
-		/*response.setContentType("application/json");
-		response.getWriter().write("{\n" + 
-				"   \"resultados\":[\n" + 
-				"       {\"titulo\": \"kkkkk\"},\n" + 
-				"       {\"titulo\": \"hahaha\"}\n" + 
-				"   ]\n" + 
-				"}");*/
 	}
 
 	/**

@@ -23,4 +23,5 @@ SELECT l.isbn AS ISBN, l.titulo, l.nome_autor, l.nome_editora, l.nome_estilo,
 		e.precoUnitario, e.qtdDisponivel
 		FROM livraria.livro l
 		INNER JOIN livraria.exemplar e ON e.ISBN = l.ISBN	
-	
+
+INSERT INTO livraria.bandeira VALUES ('Visa'), ('Elo'), ('MasterCard');

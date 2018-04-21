@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +30,13 @@ public class ComprarLivroServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			request.setAttribute("livro", ConexaoBanco.consultarLivro(request.getParameter("isbn")));
 			request.getRequestDispatcher("/comprar_livro.jsp").forward(request, response);
 		} catch (LivroNaoEncontradoException e) {
-			// TODO Auto-generated catch block
 			response.sendError(404, e.getMessage());;
+		} catch (SQLException e) {
+			response.sendError(500, e.getMessage());
 		}
 	}
 

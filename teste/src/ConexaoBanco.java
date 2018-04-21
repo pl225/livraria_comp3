@@ -24,36 +24,26 @@ public class ConexaoBanco {
 	
 	private static Connection conn;
 	
-	private static void connect() {
-		try {
-			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private static void connect() throws SQLException {
+		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
+		conn = DriverManager.getConnection(URL, USER, PASSWORD);
 	}
 	
-	public static ArrayList<Pesquisa> coletarPesquisas () {
+	public static ArrayList<Pesquisa> coletarPesquisas () throws SQLException {
 		
 		connect();
 		ArrayList<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 		Statement stmt = null;
 		ResultSet results = null;
+			
+		stmt = conn.createStatement();
+		results = stmt.executeQuery("SELECT tipo_pesquisa, palavra_chave FROM livraria.pesquisas");
 		
-		try {
-			
-			stmt = conn.createStatement();
-			results = stmt.executeQuery("SELECT tipo_pesquisa, palavra_chave FROM livraria.pesquisas");
-			
-			while (results.next()) {
-				pesquisas.add(new Pesquisa(results.getInt("tipo_pesquisa"), results.getString("palavra_chave")));
-			}
-			
-			disconnect(stmt, results);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		while (results.next()) {
+			pesquisas.add(new Pesquisa(results.getInt("tipo_pesquisa"), results.getString("palavra_chave")));
 		}
+		
+		disconnect(stmt, results);
 		
 		return pesquisas;
 	}
@@ -95,15 +85,15 @@ public class ConexaoBanco {
 		}
 	}
 	
-	public static ArrayList<Livro> consultarLivros (String tipoBusca, String parametro) {
+	public static ArrayList<Livro> consultarLivros (String tipoBusca, String parametro) throws SQLException {
 		
-		connect();
+		
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		Statement stmt = null;
 		ResultSet results = null;
 		
 		try {
-			
+			connect();
 			stmt = conn.createStatement();
 			results = stmt.executeQuery("SELECT "
 					+ " l.isbn AS ISBN, l.titulo, l.nome_autor, l.nome_editora, l.nome_estilo,"
@@ -118,30 +108,20 @@ public class ConexaoBanco {
 						results.getString("nome_estilo"), results.getString("nome_editora"),
 						results.getFloat("precoUnitario"), results.getInt("qtdDisponivel")));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				disconnect(stmt, results);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			disconnect(stmt, results);
 		}
-		
 		return livros;
 	}
 	
-	public static Livro consultarLivro (String isbn) throws LivroNaoEncontradoException {
-		connect();
+	public static Livro consultarLivro (String isbn) throws LivroNaoEncontradoException, SQLException {
 		
 		Statement stmt = null;
 		ResultSet results = null;
 		Livro livro = null;
 		
 		try {
-			
+			connect();	
 			stmt = conn.createStatement();
 			results = stmt.executeQuery("SELECT "
 					+ " l.isbn AS ISBN, l.titulo, l.nome_autor, l.nome_editora, l.nome_estilo,"
@@ -156,20 +136,35 @@ public class ConexaoBanco {
 						results.getString("nome_estilo"), results.getString("nome_editora"),
 						results.getFloat("precoUnitario"), results.getInt("qtdDisponivel"));
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				disconnect(stmt, results);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			disconnect(stmt, results);
 		}
 		
 		if (livro != null) return livro;
 		else throw new Livro.LivroNaoEncontradoException();
 	}
 	
+	public static ArrayList<String> consultarBandeiras () throws SQLException {
+		
+		Statement stmt = null;
+		ResultSet results = null;
+		ArrayList<String> bandeiras = new ArrayList<String>();
+		
+		try {
+			connect();
+				
+			stmt = conn.createStatement();
+			results = stmt.executeQuery("SELECT *"
+					+ " FROM livraria.bandeira");
+			
+			while (results.next()) {
+				bandeiras.add(results.getString(0));
+			}
+			
+			return bandeiras;
+			
+		} finally {
+			disconnect(stmt, results);	
+		}
+	}
 }

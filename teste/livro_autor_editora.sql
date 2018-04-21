@@ -27,3 +27,7 @@ CREATE TABLE livraria.exemplar (
 	precoUnitario real NOT NULL,
 	qtdDisponivel int NOT NULL
 );
+
+CREATE TABLE livraria.bandeira (
+	nome VARCHAR(20) PRIMARY KEY
+);
