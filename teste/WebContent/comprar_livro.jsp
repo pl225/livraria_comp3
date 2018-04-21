@@ -45,9 +45,7 @@
 			<div class="form-group col-md-3">
 				<label for="qtdExemplar">Quantidade de livros</label>
 				<input type="number" name="qtdExemplar" min="1" value="1" required class="form-control">
-				<div class="invalid-feedback">
-      			  Este campo é obrigatório.
-      			</div>
+				<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 			</div>
 			
 			<div class="form-group col-md-3">
@@ -88,9 +86,12 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-6">
 					<label for="bandeira">Bandeira</label>
-					<select class="custom-select form-control" >
+					<select class="custom-select form-control" name="bandeira">
 						<option value="" selected>(Selecione uma bandeira)</option>
 					</select>
+					<div class="invalid-feedback">
+      			  		Selecione uma das opções.
+      				</div>
 				</div>
 			</div>
 			
@@ -98,11 +99,13 @@
 				<div class="form-group col-md-3">
 					<label for="numCartao" >Nº cartão</label>
 					<input type="text" name="numCartao"  class="form-control">
+					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 				
 				<div class="form-group col-md-3">
 					<label for="digitoVerificador">Dígito Verificador</label>
 					<input type="text" name="digitoVerificador"  class="form-control">
+					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 			</div>
 			
@@ -110,10 +113,12 @@
 				<div class="form-group col-md-3">
 					<label for="numParcelasCd">Nº parcelas</label>
 					<input type="number" name="numParcelasCd" min="1" max="1" value="1"  class="form-control">
+					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="codSeguranca">Código de Segurança</label>
 					<input type="text" name="codSeguranca"  class="form-control">
+					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 			</div>
 		</div>
@@ -123,9 +128,7 @@
 				<div class="form-group col-md-3">
 					<label for="quantiaPaga">Valor pago</label>
 					<input type="text" name="quantiaPaga"  class="form-control">
-					<div class="invalid-feedback">
-      			  		Este campo é numérico e obrigatório.
-      				</div>
+					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 				
 				<div class="form-group col-md-3">
