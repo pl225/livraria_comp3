@@ -42,6 +42,13 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 	});
 });
 
+document.getElementsByName("quantiaPaga")[0].addEventListener('change', function () {
+	if (!invalidNumber(this.value)) {
+		document.getElementsByName("troco")[0].value = parseFloat(this.value).toFixed(2) - 
+			parseFloat(document.getElementsByName("totalPagar")[0].value).toFixed(2);
+	}
+});
+
 function invalidNumber (number) {
 	return number === '' || isNaN(number);
 }
@@ -91,6 +98,8 @@ document.getElementById("formCompraLivro").addEventListener('submit', function (
 	if (dinheiro.checked) {
 		var quantiaPaga = document.getElementsByName("quantiaPaga")[0];
 		if (invalidNumber(quantiaPaga.value)) quantiaPaga.classList.add(invalido);
+		else if (parseFloat(quantiaPaga.value) < 
+				parseFloat(document.getElementsByName("totalPagar")[0].value)) quantiaPaga.classList.add(invalido);
 	} else if (credito.checked) {
 		var bandeira = document.getElementsByName("bandeira")[0];
 		var numCartao = document.getElementsByName("numCartao")[0];
