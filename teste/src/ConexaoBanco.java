@@ -52,6 +52,11 @@ public class ConexaoBanco {
 		if (s != null) s.close();
 		if (r != null) r.close();
 		if (conn != null) conn.close();
+		
+		try {
+		DriverManager.getConnection(
+			    URL + ";user=" + USER + ";password=" + PASSWORD + ";shutdown=true");
+		} catch (SQLException e) {}
 	}
 	
 	public static List<Livro> consultarLivrosHibernate (String tipoBusca, String parametro) throws Exception {
@@ -158,7 +163,7 @@ public class ConexaoBanco {
 					+ " FROM livraria.bandeira");
 			
 			while (results.next()) {
-				bandeiras.add(results.getString(0));
+				bandeiras.add(results.getString(1));
 			}
 			
 			return bandeiras;
