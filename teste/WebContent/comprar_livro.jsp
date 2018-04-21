@@ -147,6 +147,7 @@
 					<div class="form-group col-md-3">
 						<label for="cpf">CPF do cliente</label>
 						<input type="text" name="cpf" class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-6">
@@ -192,16 +193,19 @@
 					<div class="form-group col-md-3">
 						<label for="codigoBanco">Código do banco</label>
 						<input type="text" name="codigoBanco"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroAgencia">Número da Agência</label>
 						<input type="text" name="numeroAgencia"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="digitoAgencia">Díg. ver. Agência</label>
 						<input type="text" name="digitoAgencia"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 				</div>
 				
@@ -209,21 +213,25 @@
 					<div class="form-group col-md-3">
 						<label for="numConta">Número da conta</label>
 						<input type="text" name="numConta"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroCheque">Número do cheque</label>
 						<input type="text" name="numeroCheque"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 										
 					<div class="form-group col-md-3" class="predatado" hidden>
 						<label for="numParcelasCheque">Nº parcelas</label>
-						<input type="number" name="numParcelasCheque"  min="1" value="1" class="form-control">
+						<input type="number" name="numParcelasCheque"  min="1" value="1" max="1" class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3" class="predatado" hidden>
 						<label for="dataDebito">Data debt.</label>
 						<input type="date" name="dataDebito"  class="form-control">
+						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 				</div>

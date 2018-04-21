@@ -19,7 +19,20 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 ['input', 'change'].forEach(function (e) {
 	var precoUnitario = document.getElementsByName("totalPagar")[0].value;
 	document.getElementsByName("qtdExemplar")[0].addEventListener(e, function () {
-		document.getElementsByName("totalPagar")[0].value = parseFloat(this.value * precoUnitario).toFixed(2);
+		var totalPagar = document.getElementsByName("totalPagar")[0];
+		var numParcelasCd = document.getElementsByName("numParcelasCd")[0];
+		var numParcelasCheque = document.getElementsByName("numParcelasCheque")[0];
+		totalPagar.value = parseFloat(this.value * precoUnitario).toFixed(2);
+		
+		if (totalPagar.value > 200.00) { // RN1
+			numParcelasCd.max = '';
+			numParcelasCheque.max = '';
+		} else {
+			numParcelasCd.max = 1;
+			numParcelasCd.value = 1;
+			numParcelasCheque.max = 1;
+			numParcelasCheque.value = 1;
+		}
 	});
 });
 
@@ -76,6 +89,20 @@ document.getElementById("formCompraLivro").addEventListener('submit', function (
 		if (invalidNumber(numParcelasCd.value))	numParcelasCd.classList.add(invalido);
 		if (invalidNumber(codSeguranca.value))	codSeguranca.classList.add(invalido);
 		if (bandeira.options[bandeira.selectedIndex].value == '') bandeira.classList.add(invalido);
+	} else if (cheque.checked) {
+		var cpf = document.getElementsByName("cpf")[0];
+		var codigoBanco = document.getElementsByName("codigoBanco")[0];
+		var numeroAgencia = document.getElementsByName("numeroAgencia")[0];
+		var digitoAgencia = document.getElementsByName("digitoAgencia")[0];
+		var numConta = document.getElementsByName("numConta")[0];
+		var numeroCheque = document.getElementsByName("numeroCheque")[0];
+		
+		if (invalidNumber(cpf.value))	cpf.classList.add(invalido);
+		if (invalidNumber(codigoBanco.value))	codigoBanco.classList.add(invalido);
+		if (invalidNumber(numeroAgencia.value))	numeroAgencia.classList.add(invalido);
+		if (invalidNumber(digitoAgencia.value))	digitoAgencia.classList.add(invalido);
+		if (invalidNumber(numConta.value))	numConta.classList.add(invalido);
+		if (invalidNumber(numeroCheque.value))	numeroCheque.classList.add(invalido);
 	}
 	
 	if (checkFormValid()) this.submit();
