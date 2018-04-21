@@ -23,15 +23,47 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 	});
 });
 
+function invalidNumber (number) {
+	return number === '' || isNaN(number);
+}
+
+function removeInvalidElements() {
+	var inputs = document.getElementById("formCompraLivro").getElementsByTagName('input');
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].classList.remove("is-invalid");
+	}
+	document.getElementById("validar-forma-pagamento").style.display = 'none';
+}
+
+function checkFormValid () {
+	if (document.getElementById("validar-forma-pagamento").style.display == 'block') return false;
+	var inputs = document.getElementById("formCompraLivro").getElementsByTagName('input');
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].classList.contains("is-invalid")) return false;
+	}
+	return true;
+}
+
 document.getElementById("formCompraLivro").addEventListener('submit', function (e) {
 	e.preventDefault();
 	
+	removeInvalidElements();
+	
 	var qtdExemplar = document.getElementsByName("qtdExemplar")[0];
-	var formaPagamento = document.getElementsByName("forma_pagamento");
+	var validarFormaPagamento = document.getElementById("validar-forma-pagamento");
+	var cheque = document.getElementById("cheque");
+	var credito = document.getElementById("credito");
+	var dinheiro = document.getElementById("dinheiro");
 	var invalido = "is-invalid";
 	
-	if (qtdExemplar.value === '') {
-		qtdExemplar.classList.add(invalido);
-		//return;
+	if (invalidNumber(qtdExemplar.value))	qtdExemplar.classList.add(invalido);
+	if (!(cheque.checked || dinheiro.checked || credito.checked))  validarFormaPagamento.style.display = 'block';
+	
+	if (dinheiro.checked) {
+		var quantiaPaga = document.getElementsByName("quantiaPaga")[0];
+		if (invalidNumber(quantiaPaga.value)) quantiaPaga.classList.add(invalido);
 	}
+	
+	if (checkFormValid()) this.submit();
+	
 });

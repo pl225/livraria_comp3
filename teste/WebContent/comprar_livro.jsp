@@ -79,6 +79,9 @@
 	  			class="form-check-input" value="2">
 	  			<label class="form-check-label form-control" for="dinheiro">Dinheiro</label>
 			</div>
+			<div class="invalid-feedback" id="validar-forma-pagamento">
+      			  Selecione uma das opções.
+      		</div>
 		</div>
 		
 		<div class="campos-cd" hidden>
@@ -120,6 +123,9 @@
 				<div class="form-group col-md-3">
 					<label for="quantiaPaga">Valor pago</label>
 					<input type="text" name="quantiaPaga"  class="form-control">
+					<div class="invalid-feedback">
+      			  		Este campo é numérico e obrigatório.
+      				</div>
 				</div>
 				
 				<div class="form-group col-md-3">
