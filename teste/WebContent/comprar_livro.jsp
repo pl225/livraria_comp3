@@ -30,6 +30,7 @@
 
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ page import="meu_pacote.Livro" %>
+<%@ page import="java.util.ArrayList" %>
 
 <div style="width:80%; margin: auto; min-height:100%; position:relative;" id="corpo">
 
@@ -39,7 +40,8 @@
 	
 	<br/>
 	
-	<form action="comprar_livro" method="post" id="formCompraLivro">
+	<form action="comprar_livro?isbn=<%= ((Livro) request.getAttribute("livro")).getISBN() %>" 
+	method="post" id="formCompraLivro">
 	
 		<div class="form-row col-md-12">
 			<div class="form-group col-md-3">
@@ -88,6 +90,18 @@
 					<label for="bandeira">Bandeira</label>
 					<select class="custom-select form-control" name="bandeira">
 						<option value="" selected>(Selecione uma bandeira)</option>
+						
+						<%
+							if (request.getAttribute("bandeiras") != null) {
+								ArrayList<String> bandeiras = (ArrayList<String>) request.getAttribute("bandeiras");
+								for (String s: bandeiras) {
+						%>
+						
+						<option value="<%= s %>"><%= s %></option>
+						<%
+								}
+							}
+						%>
 					</select>
 					<div class="invalid-feedback">
       			  		Selecione uma das opções.
