@@ -27,17 +27,31 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 		if (totalPagar.value > 200.00) { // RN1
 			numParcelasCd.max = '';
 			numParcelasCheque.max = '';
+			
+			document.getElementsByClassName("predatado")[0].removeAttribute("hidden");
+			document.getElementsByClassName("predatado")[1].removeAttribute("hidden");
 		} else {
 			numParcelasCd.max = 1;
 			numParcelasCd.value = 1;
 			numParcelasCheque.max = 1;
 			numParcelasCheque.value = 1;
+			
+			document.getElementsByClassName("predatado")[0].setAttribute("hidden", true);
+			document.getElementsByClassName("predatado")[1].setAttribute("hidden", true);
 		}
 	});
 });
 
 function invalidNumber (number) {
 	return number === '' || isNaN(number);
+}
+
+function invalidDate (date) {
+	if (date == '') return true;
+	else {
+		var data = new Date(date);
+		return data.setDate(data.getDate() + 1) < new Date();
+	}
 }
 
 function removeInvalidElements() {
@@ -51,7 +65,7 @@ function removeInvalidElements() {
 
 function checkFormValid () {
 	if (document.getElementById("validar-forma-pagamento").style.display == 'block') return false;
-	if (document.getElementsByName("bandeira")[0].constains("is-invalid")) return false;
+	if (document.getElementsByName("bandeira")[0].classList.contains("is-invalid")) return false;
 	var inputs = document.getElementById("formCompraLivro").getElementsByTagName('input');
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].classList.contains("is-invalid")) return false;
@@ -103,6 +117,15 @@ document.getElementById("formCompraLivro").addEventListener('submit', function (
 		if (invalidNumber(digitoAgencia.value))	digitoAgencia.classList.add(invalido);
 		if (invalidNumber(numConta.value))	numConta.classList.add(invalido);
 		if (invalidNumber(numeroCheque.value))	numeroCheque.classList.add(invalido);
+		
+		if (document.getElementsByClassName("predatado")[0].getAttribute("hidden") != '') {
+			var numParcelasCheque = document.getElementsByName("numParcelasCheque")[0];
+			if (invalidNumber(numParcelasCheque.value)) numParcelasCheque.classList.add(invalido);
+			if (parseInt(numParcelasCheque.value) > 1) { // RN1
+				var dataDebito = document.getElementsByName("dataDebito")[0];
+				if (invalidDate(dataDebito.value)) dataDebito.classList.add(invalido); 
+			}
+		}
 	}
 	
 	if (checkFormValid()) this.submit();

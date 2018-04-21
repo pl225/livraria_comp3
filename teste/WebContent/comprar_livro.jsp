@@ -222,16 +222,20 @@
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 										
-					<div class="form-group col-md-3" class="predatado" hidden>
+					<div class="form-group col-md-3 predatado" hidden>
 						<label for="numParcelasCheque">Nº parcelas</label>
 						<input type="number" name="numParcelasCheque"  min="1" value="1" max="1" class="form-control">
-						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
+						<div class="invalid-feedback">
+							Este campo é numérico.
+						</div>
 					</div>
 					
-					<div class="form-group col-md-3" class="predatado" hidden>
+					<div class="form-group col-md-3 predatado" hidden>
 						<label for="dataDebito">Data debt.</label>
 						<input type="date" name="dataDebito"  class="form-control">
-						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
+						<div class="invalid-feedback">
+							Este campo é obrigatório se o nº de parcelas é maior que 1.
+						</div>
 					</div>
 					
 				</div>
