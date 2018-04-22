@@ -21,6 +21,15 @@ public abstract class RegistroCompra {
 		this.livro = ConexaoBanco.consultarLivro(isbn);
 	}
 	
+	
+	public RegistroCompra (String qtdExemplar, String isbn, String bandeira, 
+			String numCartao, String digito, String numParcelas, String codSeguranca) throws LivroNaoEncontradoException, SQLException {
+		this.qtdExemplar = Integer.parseInt(qtdExemplar);
+		this.data = Calendar.getInstance();
+		this.formaPagamento = new FormaPagamentoCC(numParcelas, numCartao, digito, codSeguranca, bandeira);
+		this.livro = ConexaoBanco.consultarLivro(isbn);
+	}
+	
 	protected float calcularTotalCompra () {
 		return this.qtdExemplar * this.livro.getExemplar().getPrecoUnitario();
 	}
