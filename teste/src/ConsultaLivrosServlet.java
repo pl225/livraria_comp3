@@ -13,17 +13,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bd_connection.ConexaoBanco;
+
 /**
  * Servlet implementation class HelloWorld
  */
-@WebServlet("/consultar_livro")
-public class ConsultaLivroServlet extends HttpServlet {
+@WebServlet("/consultar_livros")
+public class ConsultaLivrosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultaLivroServlet() {
+    public ConsultaLivrosServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +34,12 @@ public class ConsultaLivroServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter writer = response.getWriter();
-		// TODO Auto-generated method stub
 		
-		/*Enumeration<String> enumerador = request.getParameterNames();
-		String parametro;
-		while (enumerador.hasMoreElements()) {
-			parametro = enumerador.nextElement();
-			System.out.println("Parâmetro " + parametro + " " + request.getParameter(parametro));
-		}*/
-		
-		for (Pesquisa p:ConexaoBanco.coletarPesquisas()) {
-			writer.println(p);
+		try {
+			request.setAttribute("results", ConexaoBanco.consultarLivros(request.getParameter("tipo_busca"), request.getParameter("pesquisa")));
+			request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
+		} catch (SQLException e) {
+			response.sendError(500, e.getMessage());
 		}
 	}
 
