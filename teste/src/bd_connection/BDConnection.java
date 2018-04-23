@@ -14,10 +14,13 @@ public class BDConnection {
 	private Connection conn;
 	private Statement stmt;
 	private ResultSet rs;
+	private boolean transacao;
 	
-	public BDConnection () throws SQLException {
+	public BDConnection (boolean transacao) throws SQLException {
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 		this.conn = DriverManager.getConnection(URL, USER, PASSWORD);
+		this.transacao = transacao;
+		if (this.transacao) this.conn.setAutoCommit(false);
 	}
 	
 	public void desconectar () throws SQLException{
@@ -42,6 +45,19 @@ public class BDConnection {
 		return this.stmt.executeUpdate(uq.toString());
 	}
 	
+	public int execute (UpdatingQuery uq, String coluna) throws SQLException {
+		if (this.stmt != null) this.stmt.close();
+		this.stmt = this.conn.createStatement();
+		int afetadas = this.stmt.executeUpdate(uq.toString(), new String [] {coluna});
+		if (afetadas <= 0) throw new SQLException();
+		
+		try (ResultSet ids = this.stmt.getGeneratedKeys()) {
+			if (ids.next()) return ids.getInt(1);
+			else throw new SQLException();
+		}
+		
+	}
+	
 	public void execute (ConsultingQuery cq) throws SQLException {
 		if (this.rs != null) this.rs.close();
 		if (this.stmt != null) this.stmt.close();
@@ -59,5 +75,13 @@ public class BDConnection {
 	
 	public <T> T getDado (int coluna, Class<T> tipo) throws SQLException {
 		return tipo.cast(this.rs.getObject(coluna));
+	}
+	
+	public void commit () throws SQLException {
+		if (this.transacao) this.conn.commit();
+	}
+	
+	public void rollback () throws SQLException {
+		if (this.transacao) this.conn.rollback();
 	}
 }
