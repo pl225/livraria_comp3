@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bd_connection.ConexaoBanco;
+import catalogos.CatalogoEstoque;
 import efetuar_venda.EstoqueLivro;
 import efetuar_venda.FormaPagamento;
 import efetuar_venda.LivroIndisponivelException;
@@ -69,7 +70,9 @@ public class ComprarLivroServlet extends HttpServlet {
 							request.getParameter("codSeguranca"));
 				} 
 				
-				EstoqueLivro.registrarCompra(registroCompra);
+				//EstoqueLivro.registrarCompra(registroCompra);
+				
+				new CatalogoEstoque().registrarCompra(registroCompra);
 				
 				request.setAttribute("sucesso", "Compra realizada com sucesso.");
 				request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
@@ -77,6 +80,8 @@ public class ComprarLivroServlet extends HttpServlet {
 				request.setAttribute("erro", "Infelizmente esse livro se encontra indisponível.");
 				request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
 			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
 				response.sendError(500, e.getMessage());
 			} catch (LivroNaoEncontradoException e) {
 				response.sendError(404, e.getMessage());
