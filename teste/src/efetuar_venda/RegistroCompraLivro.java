@@ -5,12 +5,29 @@ import java.sql.SQLException;
 import meu_pacote.Livro.LivroNaoEncontradoException;
 
 public class RegistroCompraLivro extends RegistroCompra {
-	public RegistroCompraLivro(String total, String valorPago, String isbn) throws LivroNaoEncontradoException, SQLException {
-		super(total, valorPago, isbn);
+	
+	private int qtdExemplar;
+	
+	public RegistroCompraLivro(String qtdExemplar, String valorPago, String isbn) throws LivroNaoEncontradoException, SQLException {
+		super(valorPago, isbn);
+		this.qtdExemplar = Integer.parseInt(qtdExemplar);
+		this.total = this.calcularValorTotal();
 	}
 	
 	public RegistroCompraLivro (String qtdExemplar, String isbn, String bandeira, 
 			String numCartao, String digito, String numParcelas, String codSeguranca) throws LivroNaoEncontradoException, SQLException {
-		super(qtdExemplar,isbn, bandeira, numCartao, digito, numParcelas, codSeguranca);
+		super(isbn, bandeira, numCartao, digito, numParcelas, codSeguranca);
+		this.qtdExemplar = Integer.parseInt(qtdExemplar);
+		this.total = this.calcularValorTotal();
+		
 	}
+	
+	public int getQtdExemplar () {
+		return this.qtdExemplar; 
+	}
+	
+	private float calcularValorTotal () {
+		return this.getQtdExemplar() * this.getLivro().getExemplar().getPrecoUnitario();
+	}
+	
 }

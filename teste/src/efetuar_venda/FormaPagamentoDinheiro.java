@@ -7,4 +7,8 @@ public class FormaPagamentoDinheiro extends FormaPagamento {
 		this.valorPago = Float.parseFloat(valorPago);
 	}
 	
+	public float getValorPago () {
+		return this.valorPago;
+	}
+	
 }
