@@ -17,7 +17,9 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 
 <div style="width:80%; margin: auto;">
-
+	
+	<%@ include file="/WEB-INF/alert.jsp" %>
+	
 	<div class="row col-md-12 col-sm-12" style="margin-left: .5px">
 		<h3>Consulta de livros</h3>
 	</div>
