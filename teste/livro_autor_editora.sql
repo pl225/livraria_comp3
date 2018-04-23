@@ -74,4 +74,15 @@ CREATE TABLE livraria.registroCompraLivro (
 	qtdExemplar INT NOT NULL
 );
 
-INSERT INTO livraria.formaPagamento VALUES (DEFAULT); 
+CREATE TABLE livraria.cartaoCredito (
+	numero VARCHAR(20) PRIMARY KEY,
+	senha VARCHAR(255) NOT NULL,
+	codSeguranca INT NOT NULL,
+	bandeira VARCHAR(20) NOT NULL REFERENCES livraria.bandeira(nome)
+);
+
+CREATE TABLE livraria.formaPagamentoCC (
+	ID INT PRIMARY KEY REFERENCES livraria.formaPagamento(ID),
+	qtdParcelas INT NOT NULL,
+	numeroCC VARCHAR(20) REFERENCES livraria.cartaoCredito(numero)
+);

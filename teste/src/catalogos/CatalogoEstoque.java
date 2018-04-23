@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import bd_connection.BDConnection;
 import bd_connection.UpdatingQuery;
 import efetuar_venda.FormaPagamento;
+import efetuar_venda.FormaPagamentoCC;
 import efetuar_venda.FormaPagamentoDinheiro;
 import efetuar_venda.LivroIndisponivelException;
 import efetuar_venda.RegistroCompra;
@@ -46,6 +47,8 @@ public class CatalogoEstoque {
 		int idFormaPagamento =  this.conexaoBD.execute(cfp.insertFormaPagamento(fp), "ID");
 		if (fp instanceof FormaPagamentoDinheiro)
 			this.registrarFormaPagamento((FormaPagamentoDinheiro) fp, idFormaPagamento);
+		else if (fp instanceof FormaPagamentoCC)
+			this.registrarFormaPagamento((FormaPagamentoCC) fp, idFormaPagamento);
 		return idFormaPagamento;
 	}
 	
@@ -54,10 +57,14 @@ public class CatalogoEstoque {
 		this.conexaoBD.execute(cfp.insertFormaPagamento(fpd, idFormaPagamento));
 	}
 	
+	private void registrarFormaPagamento (FormaPagamentoCC fpcc, int idFormaPagamento) throws SQLException {
+		CatalogoFormaPagamento cfp = new CatalogoFormaPagamento();
+		this.conexaoBD.execute(cfp.insertFormaPagamento(fpcc, idFormaPagamento));
+	}
+	
 	private void registrarCompraLivro (RegistroCompraLivro rcl, int idFormaPagamento) throws SQLException {
 		CatalogoRegistroCompra crc = new CatalogoRegistroCompra();
 		int idRegistroCompra =  this.conexaoBD.execute(crc.insert((RegistroCompra) rcl, idFormaPagamento), "ID");
 		this.conexaoBD.execute(crc.insert(rcl, idRegistroCompra));
 	}
-
 }

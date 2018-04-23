@@ -21,10 +21,10 @@ public abstract class RegistroCompra {
 	}
 	
 	
-	public RegistroCompra (String isbn, String bandeira, 
-			String numCartao, String digito, String numParcelas, String codSeguranca) throws LivroNaoEncontradoException, SQLException {
+	public RegistroCompra (String isbn, String bandeira, String numCartao, String numParcelas, 
+			String codSeguranca) throws LivroNaoEncontradoException, SQLException {
 		this.data = Calendar.getInstance();
-		this.formaPagamento = new FormaPagamentoCC(numParcelas, numCartao, digito, codSeguranca, bandeira);
+		this.formaPagamento = new FormaPagamentoCC(numParcelas, numCartao, codSeguranca, bandeira);
 		this.livro = ConexaoBanco.consultarLivro(isbn);
 	}
 	

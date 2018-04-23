@@ -4,9 +4,13 @@ public class FormaPagamentoCC extends FormaPagamento {
 	private int qtdParcelas;
 	private CartaoCredito cartaoCredito;
 	
-	public FormaPagamentoCC(String qtdParcelas, String numCartao, String digito, String codSeguranca,
+	public FormaPagamentoCC(String qtdParcelas, String numCartao, String codSeguranca, 
 			String bandeira) {
 		this.qtdParcelas = Integer.parseInt(qtdParcelas);
-		this.cartaoCredito = new CartaoCredito(numCartao, digito, codSeguranca, bandeira);
+		this.cartaoCredito = new CartaoCredito(numCartao, codSeguranca, bandeira);
+	}
+	
+	public int getQtdParcelas () {
+		return this.qtdParcelas;
 	}
 }

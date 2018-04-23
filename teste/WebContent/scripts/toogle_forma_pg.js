@@ -103,12 +103,10 @@ document.getElementById("formCompraLivro").addEventListener('submit', function (
 	} else if (credito.checked) {
 		var bandeira = document.getElementsByName("bandeira")[0];
 		var numCartao = document.getElementsByName("numCartao")[0];
-		var digitoVerificador = document.getElementsByName("digitoVerificador")[0];
 		var numParcelasCd = document.getElementsByName("numParcelasCd")[0];
 		var codSeguranca = document.getElementsByName("codSeguranca")[0];
 		
 		if (invalidNumber(numCartao.value))	numCartao.classList.add(invalido);
-		if (invalidNumber(digitoVerificador.value))	digitoVerificador.classList.add(invalido);
 		if (invalidNumber(numParcelasCd.value))	numParcelasCd.classList.add(invalido);
 		if (invalidNumber(codSeguranca.value))	codSeguranca.classList.add(invalido);
 		if (bandeira.options[bandeira.selectedIndex].value == '') bandeira.classList.add(invalido);

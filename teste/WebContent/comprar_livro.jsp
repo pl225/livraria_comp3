@@ -115,12 +115,6 @@
 					<input type="text" name="numCartao"  class="form-control">
 					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
-				
-				<div class="form-group col-md-3">
-					<label for="digitoVerificador">Dígito Verificador</label>
-					<input type="text" name="digitoVerificador"  class="form-control">
-					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
-				</div>
 			</div>
 			
 			<div class="form-row col-md-12">

@@ -14,9 +14,9 @@ public class RegistroCompraLivro extends RegistroCompra {
 		this.total = this.calcularValorTotal();
 	}
 	
-	public RegistroCompraLivro (String qtdExemplar, String isbn, String bandeira, 
-			String numCartao, String digito, String numParcelas, String codSeguranca) throws LivroNaoEncontradoException, SQLException {
-		super(isbn, bandeira, numCartao, digito, numParcelas, codSeguranca);
+	public RegistroCompraLivro (String qtdExemplar, String isbn, String bandeira, String numCartao, 
+			String numParcelas, String codSeguranca) throws LivroNaoEncontradoException, SQLException {
+		super(isbn, bandeira, numCartao, numParcelas, codSeguranca);
 		this.qtdExemplar = Integer.parseInt(qtdExemplar);
 		this.total = this.calcularValorTotal();
 		

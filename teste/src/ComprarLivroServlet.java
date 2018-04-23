@@ -66,8 +66,7 @@ public class ComprarLivroServlet extends HttpServlet {
 				} else if (formaPagamento == FormaPagamento.ModoPagamento.CREDITO.ordinal()) {
 					registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
 							request.getParameter("isbn"),  request.getParameter("bandeira"), request.getParameter("numCartao"), 
-							request.getParameter("digitoVerificador"), request.getParameter("numParcelasCd"),
-							request.getParameter("codSeguranca"));
+							request.getParameter("numParcelasCd"), request.getParameter("codSeguranca"));
 				} 
 				
 				//EstoqueLivro.registrarCompra(registroCompra);
