@@ -86,3 +86,43 @@ CREATE TABLE livraria.formaPagamentoCC (
 	qtdParcelas INT NOT NULL,
 	numeroCC VARCHAR(20) REFERENCES livraria.cartaoCredito(numero)
 );
+
+CREATE TABLE livraria.banco (
+	codigo VARCHAR(10) PRIMARY KEY
+);
+
+CREATE TABLE livraria.agencia (
+	numero INT,
+	digitoVerificador INT,
+	codigoBanco VARCHAR(10) NOT NULL REFERENCES livraria.banco(codigo),
+	PRIMARY KEY (numero, digitoVerificador)
+);
+
+CREATE TABLE livraria.conta (
+	numero INT,
+	digitoVerificador INT,
+	numeroAgencia INT NOT NULL,
+	digitoVerificadorAgencia INT NOT NULL,
+	CPF VARCHAR(14) NOT NULL REFERENCES livraria.cliente(CPF),
+	FOREIGN KEY (numeroAgencia, digitoVerificadorAgencia)
+	REFERENCES livraria.agencia(numero, digitoVerificador),
+	PRIMARY KEY (numero, digitoVerificador)
+);
+
+CREATE TABLE livraria.cheque (
+	numero INT PRIMARY KEY,
+	numeroConta INT,
+	digitoVerificadorConta INT,
+	FOREIGN KEY (numeroConta, digitoVerificadorConta)
+	REFERENCES livraria.conta(numero, digitoVerificador)
+);
+
+CREATE TABLE livraria.formaPagamentoCheque (
+	ID INT PRIMARY KEY REFERENCES livraria.formaPagamento(ID),
+	numeroCheque INT REFERENCES livraria.cheque(numero)
+);
+
+ALTER TABLE livraria.cheque
+	ADD COLUMN qtdParcelas INT;
+ALTER TABLE livraria.cheque
+	ADD COLUMN dataDebitamento TIMESTAMP;
