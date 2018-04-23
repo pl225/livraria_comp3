@@ -31,3 +31,47 @@ CREATE TABLE livraria.exemplar (
 CREATE TABLE livraria.bandeira (
 	nome VARCHAR(20) PRIMARY KEY
 );
+
+CREATE TABLE livraria.cliente (
+	CPF VARCHAR(14) PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE livraria.telefone (
+	CPF VARCHAR(14) REFERENCES livraria.cliente(CPF),
+	numero VARCHAR(15) NOT NULL,
+	PRIMARY KEY (CPF, numero)
+);
+
+CREATE TABLE livraria.endereco (
+	CPF VARCHAR(14) PRIMARY KEY REFERENCES livraria.cliente(CPF),
+	rua VARCHAR(100) NOT NULL,
+	numero INT,
+	bairro VARCHAR(100) NOT NULL,
+	cidade VARCHAR(100) NOT NULL,
+	CEP VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE livraria.formaPagamento (
+	ID int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+);
+
+CREATE TABLE livraria.formaPagamentoDinheiro (
+	ID INT PRIMARY KEY REFERENCES livraria.formaPagamento(ID),
+	valorPago REAL NOT NULL
+);
+
+CREATE TABLE livraria.registroCompra (
+	ID INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	total REAL NOT NULL,
+	data TIMESTAMP NOT NULL,
+	ISBN VARCHAR(20) NOT NULL REFERENCES livraria.livro(ISBN),
+	IdFormaPagamento INT NOT NULL REFERENCES livraria.formaPagamento(ID)
+);
+
+CREATE TABLE livraria.registroCompraLivro (
+	ID INT PRIMARY KEY REFERENCES livraria.registroCompra(ID),
+	qtdExemplar INT NOT NULL
+);
+
+INSERT INTO livraria.formaPagamento VALUES (DEFAULT); 

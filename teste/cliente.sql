@@ -8,3 +8,5 @@ CREATE TABLE livraria.cliente (
 	celular VARCHAR(15) NOT NULL,
 	tel_fixo VARCHAR(15)
 );
+
+DROP TABLE livraria.cliente;
