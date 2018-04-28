@@ -67,11 +67,16 @@ public class ComprarLivroServlet extends HttpServlet {
 					registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
 							request.getParameter("isbn"),  request.getParameter("bandeira"), request.getParameter("numCartao"), 
 							request.getParameter("numParcelasCd"), request.getParameter("codSeguranca"));
-				} 
+				} else if (formaPagamento == FormaPagamento.ModoPagamento.CHEQUE.ordinal())  {
+					/*registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
+							request.getParameter("isbn"),  request.getParameter("codigoBanco"), request.getParameter("numeroAgencia"), 
+							request.getParameter("digitoAgencia"), request.getParameter("numConta"), request.getParameter("numeroCheque"),
+							request.getParameter("numParcelasCheque"), request.getParameter("dataDebito"), request.getParameter("cpf"));*/
+				}
 				
 				//EstoqueLivro.registrarCompra(registroCompra);
 				
-				new CatalogoEstoque().registrarCompra(registroCompra);
+				CatalogoEstoque.getInstance().registrarCompra(registroCompra);
 				
 				request.setAttribute("sucesso", "Compra realizada com sucesso.");
 				request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
@@ -87,5 +92,4 @@ public class ComprarLivroServlet extends HttpServlet {
 			}
 		}
 	}
-
 }
