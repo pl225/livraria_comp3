@@ -25,3 +25,17 @@ SELECT l.isbn AS ISBN, l.titulo, l.nome_autor, l.nome_editora, l.nome_estilo,
 		INNER JOIN livraria.exemplar e ON e.ISBN = l.ISBN	
 
 INSERT INTO livraria.bandeira VALUES ('Visa'), ('Elo'), ('MasterCard');
+
+INSERT INTO livraria.cliente VALUES ('159813097-84', 'Matheus Abreu da Costa Corrêa'),
+									('013224147-18', 'Raquel de Abreu da Costa');
+									
+INSERT INTO livraria.endereco VALUES ('159813097-84', 'Rua Lilian', 237, 'Amapá', 'Duque de Caxias', '25235-470'),
+									 ('013224147-18', 'Rua Lilian', 237, 'Amapá', 'Duque de Caxias', '25235-470');
+									 
+INSERT INTO livraria.telefone VALUES ('159813097-84', '980018253'),
+							         ('159813097-84', '975842709'),
+							         ('013224147-18', '982289232');
+							         
+SELECT * FROM livraria.cliente c
+	INNER JOIN livraria.endereco e on e.cpf = c.cpf
+	INNER JOIN livraria.telefone t on t.cpf = c.cpf
