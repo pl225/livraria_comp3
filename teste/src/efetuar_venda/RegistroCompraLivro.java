@@ -1,7 +1,9 @@
 package efetuar_venda;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
+import meu_pacote.Cliente.ClienteNaoEncontradoException;
 import meu_pacote.Livro.LivroNaoEncontradoException;
 
 public class RegistroCompraLivro extends RegistroCompra {
@@ -22,6 +24,17 @@ public class RegistroCompraLivro extends RegistroCompra {
 		
 	}
 	
+	public RegistroCompraLivro(String qtdExemplar, String isbn, String codigoBanco, String numeroAgencia,
+			String digitoAgencia, String numConta, String numeroCheque, String numParcelasCheque, String dataDebito,
+			String cpf) throws LivroNaoEncontradoException, SQLException, ParseException, ClienteNaoEncontradoException {
+		
+		super(qtdExemplar, isbn, codigoBanco, numeroAgencia, digitoAgencia, numConta, numeroCheque,
+				numParcelasCheque, dataDebito, cpf);
+		this.qtdExemplar = Integer.parseInt(qtdExemplar);
+		this.total = this.calcularValorTotal();
+		
+	}
+
 	public int getQtdExemplar () {
 		return this.qtdExemplar; 
 	}

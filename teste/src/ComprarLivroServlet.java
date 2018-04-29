@@ -17,6 +17,7 @@ import efetuar_venda.EstoqueLivro;
 import efetuar_venda.FormaPagamento;
 import efetuar_venda.LivroIndisponivelException;
 import efetuar_venda.RegistroCompraLivro;
+import meu_pacote.Cliente.ClienteNaoEncontradoException;
 import meu_pacote.Livro.LivroNaoEncontradoException;
 
 /**
@@ -54,42 +55,41 @@ public class ComprarLivroServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("forma_pagamento") != null) {
-			int formaPagamento = Integer.parseInt(request.getParameter("forma_pagamento"));
+		
+		int formaPagamento = Integer.parseInt(request.getParameter("forma_pagamento"));
+		
+		try {
+		
+			RegistroCompraLivro registroCompra = null;
 			
-			try {
-				RegistroCompraLivro registroCompra = null;
-				
-				if (formaPagamento == FormaPagamento.ModoPagamento.DINHEIRO.ordinal()) {
-					registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"), 
-							request.getParameter("quantiaPaga"), request.getParameter("isbn"));
-				} else if (formaPagamento == FormaPagamento.ModoPagamento.CREDITO.ordinal()) {
-					registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
-							request.getParameter("isbn"),  request.getParameter("bandeira"), request.getParameter("numCartao"), 
-							request.getParameter("numParcelasCd"), request.getParameter("codSeguranca"));
-				} else if (formaPagamento == FormaPagamento.ModoPagamento.CHEQUE.ordinal())  {
-					/*registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
-							request.getParameter("isbn"),  request.getParameter("codigoBanco"), request.getParameter("numeroAgencia"), 
-							request.getParameter("digitoAgencia"), request.getParameter("numConta"), request.getParameter("numeroCheque"),
-							request.getParameter("numParcelasCheque"), request.getParameter("dataDebito"), request.getParameter("cpf"));*/
-				}
-				
-				//EstoqueLivro.registrarCompra(registroCompra);
-				
-				CatalogoEstoque.getInstance().registrarCompra(registroCompra);
-				
-				request.setAttribute("sucesso", "Compra realizada com sucesso.");
-				request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
-			} catch (LivroIndisponivelException e) {
-				request.setAttribute("erro", "Infelizmente esse livro se encontra indisponível.");
-				request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-				response.sendError(500, e.getMessage());
-			} catch (LivroNaoEncontradoException e) {
-				response.sendError(404, e.getMessage());
+			if (formaPagamento == FormaPagamento.ModoPagamento.DINHEIRO.ordinal()) {
+				registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"), 
+						request.getParameter("quantiaPaga"), request.getParameter("isbn"));
+			} else if (formaPagamento == FormaPagamento.ModoPagamento.CREDITO.ordinal()) {
+				registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
+						request.getParameter("isbn"),  request.getParameter("bandeira"), request.getParameter("numCartao"), 
+						request.getParameter("numParcelasCd"), request.getParameter("codSeguranca"));
+			} else if (formaPagamento == FormaPagamento.ModoPagamento.CHEQUE.ordinal())  {
+				registroCompra = new RegistroCompraLivro(request.getParameter("qtdExemplar"),
+						request.getParameter("isbn"),  request.getParameter("codigoBanco"), request.getParameter("numeroAgencia"), 
+						request.getParameter("digitoAgencia"), request.getParameter("numConta"), request.getParameter("numeroCheque"),
+						request.getParameter("numParcelasCheque"), request.getParameter("dataDebito"), request.getParameter("cpf"));
 			}
+			
+			CatalogoEstoque.getInstance().registrarCompra(registroCompra);
+			
+			request.setAttribute("sucesso", "Compra realizada com sucesso.");
+			request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
+		
+		} catch (LivroIndisponivelException e) {
+			request.setAttribute("erro", "Infelizmente esse livro se encontra indisponível.");
+			request.getRequestDispatcher("/consultar_livro.jsp").forward(request, response);
+		} catch (SQLException | ParseException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			response.sendError(500, e.getMessage());
+		} catch (LivroNaoEncontradoException | ClienteNaoEncontradoException e) {
+			response.sendError(404, e.getMessage());
 		}
 	}
 }
