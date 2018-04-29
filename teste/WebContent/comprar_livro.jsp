@@ -155,7 +155,7 @@
 					<div class="form-group col-md-3">
 						<label for="cpf">CPF do cliente</label>
 						<input type="text" name="cpf" class="form-control">
-						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
+						<%@ include file="/WEB-INF/erro_campo_obrigatorio.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-6">

@@ -118,7 +118,7 @@ document.getElementById("formCompraLivro").addEventListener('submit', function (
 		var numConta = document.getElementsByName("numConta")[0];
 		var numeroCheque = document.getElementsByName("numeroCheque")[0];
 		
-		if (invalidNumber(cpf.value))	cpf.classList.add(invalido);
+		if (cpf.value === '')	cpf.classList.add(invalido);
 		if (invalidNumber(codigoBanco.value))	codigoBanco.classList.add(invalido);
 		if (invalidNumber(numeroAgencia.value))	numeroAgencia.classList.add(invalido);
 		if (invalidNumber(digitoAgencia.value))	digitoAgencia.classList.add(invalido);
