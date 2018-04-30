@@ -36,3 +36,21 @@ document.getElementsByName("cpf")[0].addEventListener('focusout', function (e) {
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
 });
+
+function consultarEstoqueExemplar (isbn, qtd) {
+	var xmlhttp = new XMLHttpRequest();
+	var url = "consulta_exemplar?isbn=" + isbn + "&qtd=" + qtd;
+	
+	xmlhttp.onreadystatechange = function() {
+	    if (this.readyState == 4) {
+	    	if (this.status == 200) {
+	    		var json = JSON.parse(this.responseText);
+	    		if (!json.disponibilidade) 
+	    			$('#livroIndisponivel').modal({keyboard: false, backdrop: 'static'});
+	    	}
+	    }
+	};
+	
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+}
