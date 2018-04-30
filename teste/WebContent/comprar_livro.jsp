@@ -155,12 +155,23 @@
 					<div class="form-group col-md-3">
 						<label for="cpf">CPF do cliente</label>
 						<input type="text" name="cpf" class="form-control">
-						<%@ include file="/WEB-INF/erro_campo_obrigatorio.jsp" %>
+						<div class="invalid-feedback" id="invalid-cpf">
+							Este campo é obrigatório.
+						</div>
+						<div class="progress" hidden="true" id="progress-cpf">
+  							<div class="progress-bar progress-bar-striped progress-bar-animated" 
+  							role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; margin-top: 2%">
+  						</div>
+					</div>
 					</div>
 					
 					<div class="form-group col-md-6">
 						<label for="nome">Nome</label>
 						<input type="text" name="nome" readonly class="form-control">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="nome">Telefone</label>
+						<input type="text" name="telefone" readonly class="form-control">
 					</div>
 				</div>
 				
@@ -259,4 +270,5 @@
 </div>
 
 <script type="text/javascript" src="scripts/toogle_forma_pg.js" ></script>
+<script type="text/javascript" src="scripts/ajax_compra_livro.js" ></script>
 <%@ include file="/WEB-INF/footer.jsp" %>

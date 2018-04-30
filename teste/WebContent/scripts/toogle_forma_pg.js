@@ -68,6 +68,7 @@ function removeInvalidElements() {
 	}
 	document.getElementById("validar-forma-pagamento").style.display = 'none';
 	document.getElementsByName("bandeira")[0].classList.remove("is-invalid");
+	document.getElementById("invalid-cpf").innerHTML = "Este campo é obrigatório.";
 }
 
 function checkFormValid () {

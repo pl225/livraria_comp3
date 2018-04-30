@@ -27,5 +27,21 @@ public class Cliente {
 		public ClienteNaoEncontradoException () {
 			super("Cliente não encontrado.");
 		}
-	}	
+	}
+	
+	public String getNome() {
+		return this.nome;
+	}
+
+	public String toJSON() {
+		return "{"
+				+ "\"nome\":\"" + this.nome + "\","
+				+ "\"logradouro\":\"" + this.endereco.getRua() + "\","
+				+ "\"numero\":" + this.endereco.getNumero() + ","
+				+ "\"cep\":\"" + this.endereco.getCep() + "\","
+				+ "\"bairro\":\"" + this.endereco.getBairro() + "\","
+				+ "\"cidade\":\"" + this.endereco.getCidade() + "\","
+				+ "\"telefone\":\"" + this.telefones.iterator().next().getNumero() + "\""
+				+ "}";
+	}
 }

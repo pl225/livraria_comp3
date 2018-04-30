@@ -11,5 +11,9 @@ public class Telefone {
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Telefone && ((Telefone) obj).numero.equals(this.numero);
-	}	
+	}
+	
+	public String getNumero() {
+		return this.numero;
+	}
 }
