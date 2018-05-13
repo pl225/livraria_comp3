@@ -138,7 +138,7 @@
 				<div class="form-row col-md-12">
 					<div class="form-group col-md-3">
 						<label for="cpf">CPF do cliente</label>
-						<input type="text" name="cpf" class="form-control">
+						<input type="text" name="cpf" class="form-control <%= erros != null && erros.contains("cpf") ? "is-invalid" : ""%>">
 						<div class="invalid-feedback" id="invalid-cpf">
 							Este campo é obrigatório.
 						</div>
@@ -195,19 +195,19 @@
 				<div class="form-row col-md-12">
 					<div class="form-group col-md-3">
 						<label for="codigoBanco">Código do banco</label>
-						<input type="text" name="codigoBanco"  class="form-control">
+						<input type="text" name="codigoBanco"  class="form-control <%= erros != null && erros.contains("codigoBanco") ? "is-invalid" : ""%>">
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroAgencia">Número da Agência</label>
-						<input type="text" name="numeroAgencia"  class="form-control">
+						<input type="text" name="numeroAgencia"  class="form-control <%= erros != null && erros.contains("numeroAgencia") ? "is-invalid" : ""%>">
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="digitoAgencia">Díg. ver. Agência</label>
-						<input type="text" name="digitoAgencia"  class="form-control">
+						<input type="text" name="digitoAgencia"  class="form-control <%= erros != null && erros.contains("digitoAgencia") ? "is-invalid" : ""%>">
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 				</div>
@@ -215,19 +215,19 @@
 				<div class="form-row col-md-12">
 					<div class="form-group col-md-3">
 						<label for="numConta">Número da conta</label>
-						<input type="text" name="numConta"  class="form-control">
+						<input type="text" name="numConta"  class="form-control <%= erros != null && erros.contains("numConta") ? "is-invalid" : ""%>">
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label for="numeroCheque">Número do cheque</label>
-						<input type="text" name="numeroCheque"  class="form-control">
+						<input type="text" name="numeroCheque"  class="form-control <%= erros != null && erros.contains("numeroCheque") ? "is-invalid" : ""%>">
 						<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 					</div>
 										
 					<div class="form-group col-md-3 predatado" hidden>
 						<label for="numParcelasCheque">Nº parcelas</label>
-						<input type="number" name="numParcelasCheque"  min="1" value="1" max="1" class="form-control">
+						<input type="number" name="numParcelasCheque"  min="1" value="1" max="1" class="form-control <%= erros != null && erros.contains("numParcelasCheque") ? "is-invalid" : ""%>">
 						<div class="invalid-feedback">
 							Este campo é numérico.
 						</div>
@@ -235,7 +235,7 @@
 					
 					<div class="form-group col-md-3 predatado" hidden>
 						<label for="dataDebito">Data debt.</label>
-						<input type="date" name="dataDebito"  class="form-control">
+						<input type="date" name="dataDebito"  class="form-control <%= erros != null && erros.contains("dataDebito") ? "is-invalid" : ""%>">
 						<div class="invalid-feedback">
 							Este campo é obrigatório se o nº de parcelas é maior que 1.
 						</div>

@@ -47,6 +47,29 @@ public class ValidarCompraLivros extends Validador {
 					if (Integer.parseInt(parametros.get("numParcelasCd")[0]) > 1)
 						this.erros.add("numParcelasCd");
 				}
+			} else {
+				if (Validador.isEmpty(parametros.get("cpf")[0]))
+					this.erros.add("cpf");
+				if (!Validador.isNumeroPreenchido(parametros.get("codigoBanco")[0]))
+					this.erros.add("codigoBanco");
+				if (!Validador.isNumeroPreenchido(parametros.get("numeroAgencia")[0]))
+					this.erros.add("numeroAgencia");
+				if (!Validador.isNumeroPreenchido("digitoAgencia"))
+					this.erros.add("digitoAgencia");
+				if (!Validador.isNumeroPreenchido(parametros.get("numConta")[0]))
+					this.erros.add("numConta");
+				if (!Validador.isNumeroPreenchido(parametros.get("numeroCheque")[0]))
+					this.erros.add("numeroCheque");
+				if (!Validador.isNumeroPreenchido(parametros.get("numParcelasCheque")[0]))
+					this.erros.add("numParcelasCheque");
+				if (!this.erros.contains("numParcelasCheque")) {
+					if (totalPagar <= 200 && Integer.parseInt(parametros.get("numParcelasCheque")[0]) > 1)
+						this.erros.add("numParcelasCheque");
+					else if (totalPagar > 200 && Integer.parseInt(parametros.get("numParcelasCheque")[0]) > 1)
+						if (Validador.isEmpty(parametros.get("dataDebito")[0]))
+							this.erros.add("dataDebito");
+				}
+					
 			}
 		}
 	}

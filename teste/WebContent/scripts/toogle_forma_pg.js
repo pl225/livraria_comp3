@@ -23,6 +23,7 @@ window.onload = function() {
 	if (credito.checked) credito.click();
 	if (dinheiro.checked) dinheiro.click();
 	if (cheque.checked) cheque.click();
+	//document.getElementsByName("qtdExemplar")[0].change();
 };
 
 ['input', 'change'].forEach(function (e) {
