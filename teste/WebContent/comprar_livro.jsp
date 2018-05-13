@@ -48,18 +48,18 @@
 			
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
 	  			<input type="radio" id="credito" name="forma_pagamento" required 
-	  			class="form-check-input" value="0" >
+	  			class="form-check-input" value="0" <%= "0".equals(request.getParameter("forma_pagamento")) ? "checked" : "" %>>
 	  			<label class="form-check-label form-control" for="credito">Cartão de crédito</label>
 			</div>
 	
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
 	  			<input type="radio" id="cheque" name="forma_pagamento" required 
-	  			class="form-check-input" value="1">
+	  			class="form-check-input" value="1" <%= "1".equals(request.getParameter("forma_pagamento")) ? "checked" : "" %>>
 	  			<label class="form-check-label form-control" for="cheque">Cheque</label>
 			</div>
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
 	  			<input type="radio" id="dinheiro" name="forma_pagamento" required 
-	  			class="form-check-input" value="2" <%= request.getParameter("forma_pagamento").equals("2") ? "checked" : "" %>>
+	  			class="form-check-input" value="2" <%= "2".equals(request.getParameter("forma_pagamento")) ? "checked" : "" %>>
 	  			<label class="form-check-label form-control" for="dinheiro">Dinheiro</label>
 			</div>
 			<div class="invalid-feedback" id="validar-forma-pagamento" <%= erros != null && erros.contains("forma_pagamento") ? "style='display:block'" : ""%>>
@@ -71,7 +71,7 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-6">
 					<label for="bandeira">Bandeira</label>
-					<select class="custom-select form-control" name="bandeira">
+					<select class="custom-select form-control <%= erros != null && erros.contains("bandeira") ? "is-invalid" : ""%>" name="bandeira">
 						<option value="" selected>(Selecione uma bandeira)</option>
 						
 						<%
@@ -95,7 +95,7 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
 					<label for="numCartao" >Nº cartão</label>
-					<input type="text" name="numCartao"  class="form-control">
+					<input type="text" name="numCartao"  class="form-control <%= erros != null && erros.contains("numCartao") ? "is-invalid" : ""%>">
 					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 			</div>
@@ -103,12 +103,12 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
 					<label for="numParcelasCd">Nº parcelas</label>
-					<input type="number" name="numParcelasCd" min="1" max="1" value="1"  class="form-control">
+					<input type="number" name="numParcelasCd" min="1" max="1" value="1"  class="form-control <%= erros != null && erros.contains("numParcelasCd") ? "is-invalid" : ""%>">
 					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="codSeguranca">Código de Segurança</label>
-					<input type="text" name="codSeguranca"  class="form-control">
+					<input type="text" name="codSeguranca"  class="form-control <%= erros != null && erros.contains("codSeguranca") ? "is-invalid" : ""%>">
 					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 			</div>

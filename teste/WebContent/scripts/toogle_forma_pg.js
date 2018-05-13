@@ -20,9 +20,9 @@ window.onload = function() {
 	var credito = document.getElementById("credito");
 	var dinheiro = document.getElementById("dinheiro");
 	var cheque = document.getElementById("cheque");
-	if (credito.checked) credito.onclick();
-	if (dinheiro.checked) {dinheiro.click();console.log(5555)}
-	if (cheque.checked) cheque.onclick();
+	if (credito.checked) credito.click();
+	if (dinheiro.checked) dinheiro.click();
+	if (cheque.checked) cheque.click();
 };
 
 ['input', 'change'].forEach(function (e) {
