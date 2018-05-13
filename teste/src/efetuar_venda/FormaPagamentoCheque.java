@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import bd_connection.UpdatingQuery;
+import catalogos.CatalogoFormaPagamentoVisitante;
 import meu_pacote.Cliente.ClienteNaoEncontradoException;
 
 public class FormaPagamentoCheque extends FormaPagamento {

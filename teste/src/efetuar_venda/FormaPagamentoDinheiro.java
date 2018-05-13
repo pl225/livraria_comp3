@@ -1,6 +1,7 @@
 package efetuar_venda;
 
 import bd_connection.UpdatingQuery;
+import catalogos.CatalogoFormaPagamentoVisitante;
 
 public class FormaPagamentoDinheiro extends FormaPagamento {
 	private float valorPago;

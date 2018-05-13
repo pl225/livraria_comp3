@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import bd_connection.BDConnection;
 import bd_connection.UpdatingQuery;
-import efetuar_venda.CatalogoFormaPagamentoVisitante;
 import efetuar_venda.FormaPagamento;
 import efetuar_venda.FormaPagamentoCC;
 import efetuar_venda.FormaPagamentoCheque;
