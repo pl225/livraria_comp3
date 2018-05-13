@@ -1,5 +1,7 @@
 package efetuar_venda;
 
+import bd_connection.UpdatingQuery;
+
 public class FormaPagamentoCC extends FormaPagamento {
 	private int qtdParcelas;
 	private CartaoCredito cartaoCredito;
@@ -12,5 +14,10 @@ public class FormaPagamentoCC extends FormaPagamento {
 	
 	public int getQtdParcelas () {
 		return this.qtdParcelas;
+	}
+
+	@Override
+	public UpdatingQuery accept(CatalogoFormaPagamentoVisitante visitante) {
+		return visitante.visit(this);
 	}
 }

@@ -3,6 +3,7 @@ package efetuar_venda;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import bd_connection.UpdatingQuery;
 import meu_pacote.Cliente.ClienteNaoEncontradoException;
 
 public class FormaPagamentoCheque extends FormaPagamento {
@@ -22,6 +23,11 @@ public class FormaPagamentoCheque extends FormaPagamento {
 	
 	public Cheque getCheque () {
 		return this.cheque;
+	}
+
+	@Override
+	public UpdatingQuery accept(CatalogoFormaPagamentoVisitante visitante) {
+		return visitante.visit(this);
 	}
 
 }

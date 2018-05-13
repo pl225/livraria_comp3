@@ -1,5 +1,7 @@
 package efetuar_venda;
 
+import bd_connection.UpdatingQuery;
+
 public class FormaPagamentoDinheiro extends FormaPagamento {
 	private float valorPago;
 	
@@ -9,6 +11,11 @@ public class FormaPagamentoDinheiro extends FormaPagamento {
 	
 	public float getValorPago () {
 		return this.valorPago;
+	}
+
+	@Override
+	public UpdatingQuery accept(CatalogoFormaPagamentoVisitante visitante) {
+		return visitante.visit(this);
 	}
 	
 }
