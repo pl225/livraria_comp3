@@ -1,0 +1,25 @@
+label.form-control {
+	border: none;
+	padding: 0px;
+}
+
+.form-check-inline {
+  		display: inline-block;
+  	 	margin-right: .0rem;
+  	 	max-width: fit-content !important;
+   	margin-right: 1% !important;
+}
+
+.campos-cliente, .dados-cheque {
+	border-width: .2rem;
+	border: solid #f7f7f9;
+	padding-top: 8px;
+	margin-left: 15px;
+	margin-bottom: 5px;
+}
+
+#corpo:after {
+	content: ' ';
+   	display: block;
+   	clear: both;
+}

@@ -1,55 +1,16 @@
-<style type="text/css">
-	
-	label.form-control {
-		border: none;
-		padding: 0px;
-	}
-
-	.form-check-inline {
-   		display: inline-block;
-   	 	margin-right: .0rem;
-   	 	max-width: fit-content !important;
-    	margin-right: 1% !important;
-	}
-	
-	.campos-cliente, .dados-cheque {
-		border-width: .2rem;
-		border: solid #f7f7f9;
-		padding-top: 8px;
-		margin-left: 15px;
-		margin-bottom: 5px;
-	}
-	
-	#corpo:after {
-		content: ' ';
-    	display: block;
-    	clear: both;
-	}
-	
-</style>
+<link rel="stylesheet" type="text/css" href="css/comprar_livro.css">
 
 <%@ include file="/WEB-INF/header.jsp" %>
 <%@ page import="meu_pacote.Livro" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ include file="/WEB-INF/modal_livro_indisponivel.jsp" %>
 
-<div class="modal fade" id="livroIndisponivel" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="titulo">Livro indisponível</h5>
-	      </div>
-	      <div class="modal-body">
-	        <p>Infelizmente, não há exemplares suficientes deste livro para que a compra seja realizada.
-	        <p>Você pode iniciar uma reserva ou tentar novamente com uma quantidade menor de exemplares.
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal" 
-	        onclick="document.getElementsByName('qtdExemplar')[0].value = 1">Tentar novamente</button>
-	        <button type="button" class="btn btn-primary">Reservar livro</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+<%
+	ArrayList<String> erros = null;
+	if (request.getAttribute("erros") != null)
+		erros = (ArrayList<String>) request.getAttribute("erros");
+%>
+
 
 <div style="width:80%; margin: auto; min-height:100%; position:relative;" id="corpo">
 
@@ -65,8 +26,10 @@
 		<div class="form-row col-md-12">
 			<div class="form-group col-md-3">
 				<label for="qtdExemplar">Quantidade de livros</label>
-				<input type="number" name="qtdExemplar" min="1" value="1" required class="form-control"
+				<input type="number" name="qtdExemplar" min="1" value="1" required 
+				class="form-control <%= erros != null && erros.contains("qtdExemplar") ? "is-invalid" : ""%>"
 				onfocusout="consultarEstoqueExemplar(<%= ((Livro) request.getAttribute("livro")).getISBN() %>, this.value)">
+				
 				<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 			</div>
 			
@@ -85,7 +48,7 @@
 			
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
 	  			<input type="radio" id="credito" name="forma_pagamento" required 
-	  			class="form-check-input" value="0">
+	  			class="form-check-input" value="0" >
 	  			<label class="form-check-label form-control" for="credito">Cartão de crédito</label>
 			</div>
 	
@@ -96,10 +59,10 @@
 			</div>
 			<div class="form-check form-check-inline col-md-3 col-sm-12">
 	  			<input type="radio" id="dinheiro" name="forma_pagamento" required 
-	  			class="form-check-input" value="2">
+	  			class="form-check-input" value="2" <%= request.getParameter("forma_pagamento").equals("2") ? "checked" : "" %>>
 	  			<label class="form-check-label form-control" for="dinheiro">Dinheiro</label>
 			</div>
-			<div class="invalid-feedback" id="validar-forma-pagamento">
+			<div class="invalid-feedback" id="validar-forma-pagamento" <%= erros != null && erros.contains("forma_pagamento") ? "style='display:block'" : ""%>>
       			  Selecione uma das opções.
       		</div>
 		</div>
@@ -155,7 +118,8 @@
 			<div class="form-row col-md-12">
 				<div class="form-group col-md-3">
 					<label for="quantiaPaga">Valor pago</label>
-					<input type="text" name="quantiaPaga"  class="form-control">
+					<input type="text" name="quantiaPaga"  
+					class="form-control <%= erros != null && erros.contains("quantiaPaga") ? "is-invalid" : ""%>">
 					<%@ include file="/WEB-INF/erro_campo_numerico.jsp" %>
 				</div>
 				

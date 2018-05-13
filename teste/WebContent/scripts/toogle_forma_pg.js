@@ -16,6 +16,15 @@ document.getElementById("dinheiro").addEventListener("click", function () {
 	document.getElementsByClassName("campos-cd")[0].setAttribute("hidden", true);
 });
 
+window.onload = function() {
+	var credito = document.getElementById("credito");
+	var dinheiro = document.getElementById("dinheiro");
+	var cheque = document.getElementById("cheque");
+	if (credito.checked) credito.onclick();
+	if (dinheiro.checked) {dinheiro.click();console.log(5555)}
+	if (cheque.checked) cheque.onclick();
+};
+
 ['input', 'change'].forEach(function (e) {
 	var precoUnitario = document.getElementsByName("totalPagar")[0].value;
 	document.getElementsByName("qtdExemplar")[0].addEventListener(e, function () {
